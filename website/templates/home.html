@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+# "hey, use this file!"
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+{% if user.is_authenticated %}
+<h1>hello world!</h1>
+<p>if you're seeing this page, it works! yippee!</p>
+<p>you are currently looking at a <strong>very heavy work in progress.</strong> the end result shall be a fancier version of the HOA oc database!</p>
+
+{% else %}
+
+<h1>Login</h1>
+<br/>
+<form method="POST" action="{% url 'home' %}">
+	{% csrf_token %}
+	<form>
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username", placeholder="Discord Username" required>
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password", placeholder="Password" required>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</form>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
