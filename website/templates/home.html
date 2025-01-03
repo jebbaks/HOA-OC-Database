@@ -3,32 +3,82 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+
 
 {% if user.is_authenticated %}
-<h1>hello world!</h1>
-<p>if you're seeing this page, it works! yippee!</p>
-<p>you are currently looking at a <strong>very heavy work in progress.</strong> the end result shall be a fancier version of the HOA oc database!</p>
+<h1>welcome to the Heart of Art OC database!</h1>
+<p>this was created with the aim of providing more security to individual records, as opposed to our current spreadsheet where everyone can just edit and potentially grief the entire database. (i also created this for a school project but shh)</p>
+<p>i will still make updates and such; simply ping me in my thread or in the thread for the database in the feedback channel if you have suggestions :] i am still a beginner so i will try my best!!</p>
+<strong>GENERAL WEBSITE GUIDE AND NOTES</strong>
+	<ul>
+		<li>upon creation, each of your OCs will automatically be assigned IDs by the website. clicking on the ID will take you to a page dedicated to your OC's details in one place. in the future, i will make it so that you can display your OC's expanded lore from the normal database, but for the sake of not complicating things for now i will leave things as they are</li>
+		<li><strong>for adding OCs:</strong> click "Add OC" in the website tab and input existing OC details either from the nerfed HOA database or new details</li>
+		<li><strong>for updating and deleting OCs:</strong> click on your OC's ID; at the bottom of your OC's record, click either "Update" to change your OC's details or "Delete" to remove your OC from the database</li>
+	</ul>
+</br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      	<th scope="col">OC Name</th>
+      	<th scope="col">Creator</th>
+      	<th scope="col">Media</th>
+      	<th scope="col">Lore summary</th>
+      	<th scope="col">Reference/Master document</th>
+      	<th scope="col">Creator's Remarks</th>
+      	<th scope="col">Time Created</th>
+      	<th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+  	
+{% if records %}
+	{% for record in records %}
+		<tr>
+			<td>{{ record.oc_name }}</td>
+			<td>{{ record.creator }}</td>
+			<td>{{ record.media }}</td>
+			<td>{{ record.lore_summary }}</td>
+			 {% if record.reference_link == "WIP" %}
+    			<td>WIP</td>
+   			 {% else %}
+    			<td><a href="{{ record.reference_link }}">{{ record.oc_name }}'s information</td>
+   			 {% endif %}
+			<td>{{ record.creator_remarks }}</td>
+			<td>{{ record.created_at }}</td>
+			<td><a href="{% url 'record' record.id %}">{{ record.id }}</td>
+		</tr>
+	{% endfor %}
+
+{% endif %}
+  </tbody>
+</table>
 
 {% else %}
 
-<h1>Login</h1>
+<div class="col-md-6 offset-md-3">
+<h1>Heart of Art OC Database Login</h1>
+		<h3>welcome to the Heart of Art OC database!</h3>
+		<p>this was created with the aim of providing more security to individual records, as opposed to our current spreadsheet where everyone can just edit and potentially grief the entire database. (i also created this for a school project but shh)</p>
+		<strong>note:</strong>
+		<ul>
+			<li>if you do not have an account, please register through the link in the tab above</li>
+		</ul>
 <br/>
 <form method="POST" action="{% url 'home' %}">
 	{% csrf_token %}
 	<form>
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Discord Username" required>
-  </div>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
-  <br/>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  		<div class="mb-3">
+    		<input type="text" class="form-control" name="username", placeholder="Discord Username" required>
+  		</div>
+  		<div class="mb-3">
+		    <input type="password" class="form-control" name="password", placeholder="Password" required>
+  		</div>
+  	<br/>
+  	<button type="submit" class="btn btn-primary">Login</button>
 </form>
-</form>
-
+	</form>
 </div>
+
 
 {% endif %}
 

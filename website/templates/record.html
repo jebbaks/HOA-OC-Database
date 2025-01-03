@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h1>OC Details</h1>
+
+<div class="card" style="width: 40rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ hoa_oc.oc_name }} ({{ hoa_oc.media }})</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ hoa_oc.creator }}</h6>
+    
+    {% if hoa_oc.reference_link == "WIP" %}
+    	<p class="card-text"><strong>Reference is a work in progress.</strong></p>
+    {% else %}
+    <a href="{{ hoa_oc.reference_link }}" class="card-link">{{ hoa_oc.oc_name }}'s information</a>
+    {% endif %}
+
+    <p class="card-text">{{ hoa_oc.lore_summary }}</p>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Full lore</h6>
+    <p class="card-text">{{ hoa_oc.full_lore }}</p>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Creator's remarks</h6>
+    <p>{{ hoa_oc.creator_remarks }}</p>
+	</br>
+	<p class="card-text"><strong>Time created: </strong>{{ hoa_oc.created_at }}</p>
+	<p class="card-text"><strong>ID: </strong>{{ hoa_oc.id }}</p>
+</div>
+  </div>
+  	</br>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to database</a>
+  <a href="{% url 'update_record' hoa_oc.id %}" class="btn btn-secondary">Update</a>  
+	<a href="{% url 'delete_record' hoa_oc.id %}" class="btn btn-danger">Delete</a>
+
+{% endblock %}

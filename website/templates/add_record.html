@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<h1>Add OC</h1>
+<strong>NOTES</strong>
+	<ul>
+		<li>your OC's name can either have their full name, nickname, title, etc. generally use the name you usually refer to them as</li>
+		<li>"Source media title" is the equivalent of the "Media/Original/Multipurpose" column in the spreadsheet. here you may input the title of the work your OC was created for, the title of your original work if any (just input (Original) if no title yet)
+			<ul>
+				<li><strong>if your oc was created for your original work titled Losecraft, for example</strong>: Losecraft (Original)</li>
+			</ul>
+		<li>the "Lore summary" and "Creator's remarks" fields are set to a limit of <strong>100 characters,</strong> including spaces. in the future i will add a field for the full lore summary (still with a character limit of course)</li>
+		<li>simply paste the link to your reference/loredoc or any other platform you store your OC's info on; the website will automatically put it into a hyperlink that displays your OC's name. if your reference is still a WIP, input WIP.</li>
+	</ul>
+</br>
+
+<form method="POST" action="{% url 'add_record' %}">
+	{% csrf_token %}
+
+	{{ form.as_p }}
+
+	<br/>
+  	<button type="submit" class="btn btn-secondary">Submit</button>
+  	<a href="{% url 'home' %}" class="btn btn-secondary">Back to database</a>
+	</form>
+
+</div>
+
+{% endblock %}
